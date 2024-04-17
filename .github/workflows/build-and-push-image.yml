@@ -1,0 +1,24 @@
+name: Build image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build image
+        run: |
+          docker build -t neuvector-ci:${{ github.sha }} .
+      - name: Scan Image
+        uses: neuvector/scan-action@main
+        with:
+          image-repository: neuvector-ci
+          image-tag: ${{ github.sha }}
+          min-high-cves-to-fail: "1"
+          min-medium-cves-to-fail: "1"
