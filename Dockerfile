@@ -6,4 +6,3 @@ ENV LANG ko_KR.UTF-8
 ENV LANGUAGE ko_KR.UTF-8
 
 COPY default.conf /etc/nginx/conf.d/default.conf
-COPY dist /usr/share/nginx/html
